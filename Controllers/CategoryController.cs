@@ -68,7 +68,10 @@ namespace storeAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(new { message = "Deleted the category successfully!" });
+
+            var categories = await _categoryRepository.GetCategories();
+            var categoriesDTO = _mapper.Map<List<CategoryDTO>>(categories);
+            return Ok(categoriesDTO);
         }
     }
 }

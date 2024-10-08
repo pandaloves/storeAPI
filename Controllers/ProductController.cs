@@ -68,7 +68,10 @@ namespace storeAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(new { message = "Deleted the product successfully!" });
+
+            var products = await _productRepository.GetProducts();
+            var ProductsDTO = _mapper.Map<List<ProductDTO>>(products);
+            return Ok(ProductsDTO);
         }
     }
 }
